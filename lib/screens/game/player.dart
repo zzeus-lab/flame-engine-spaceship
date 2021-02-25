@@ -30,7 +30,7 @@ class Player extends BaseTimedWidget {
     _player = AnimationComponent(
         0, 0, fAnimation.Animation.spriteList(sprites, stepTime: 0.1));
 
-    shotCreator = Timer(0.2, repeat: true, callback: () {
+    shotCreator = Timer(0.1, repeat: true, callback: () {
       Bullet bullet = Bullet(color: _orange);
       bullet.position = Rect.fromLTWH(52, -10, 5, 20);
       shots.add(bullet);
@@ -41,11 +41,15 @@ class Player extends BaseTimedWidget {
   resize(Size size) {
     _player.width = size.width * 0.25;
     _player.height = size.height * 0.25;
+
+    _player.x = (size.width / 2) - (_player.width / 2);
+    _player.y = (size.height / 2) + (_player.height / 2);
   }
 
   @override
   render(Canvas canvas) {
     _player.render(canvas);
+
     shots.forEach((Bullet bullet) => {bullet.render(canvas)});
     canvas.restore();
   }

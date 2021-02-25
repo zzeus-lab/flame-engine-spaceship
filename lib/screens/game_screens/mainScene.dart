@@ -13,7 +13,6 @@ class MainScene extends BaseTimedWidget {
   MainScene() {
     _background = new Background('9.png');
     _player = Player();
-    // _bullet = Bullet();
   }
 
   @override
