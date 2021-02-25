@@ -5,9 +5,7 @@ class Bullet extends BaseTimedWidget {
   final Paint color;
   Rect position;
 
-  Bullet({this.color}) {
-
-  }
+  Bullet({this.color}) {}
 
   @override
   void resize(Size size) {}
@@ -20,7 +18,6 @@ class Bullet extends BaseTimedWidget {
   @override
   void update(double t) {}
 }
-
 
 class GameObject {
   final Paint color;

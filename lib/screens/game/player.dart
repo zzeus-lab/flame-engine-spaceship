@@ -9,6 +9,8 @@ import 'package:flutter/material.dart';
 import 'package:testGame/screens/baseTimedWidget.dart';
 import 'package:testGame/screens/game/bullet.dart';
 
+import 'bullet.dart';
+
 Paint _orange = Paint()..color = Colors.orange[800];
 
 class Player extends BaseTimedWidget {
@@ -29,8 +31,9 @@ class Player extends BaseTimedWidget {
         0, 0, fAnimation.Animation.spriteList(sprites, stepTime: 0.1));
 
     shotCreator = Timer(0.2, repeat: true, callback: () {
-      shots.add(Bullet(color: _orange)
-        ..position = Rect.fromLTWH(_player.x + 15, _player.y, 20, 20));
+      Bullet bullet = Bullet(color: _orange);
+      bullet.position = Rect.fromLTWH(52, -10, 5, 20);
+      shots.add(bullet);
     });
   }
 
@@ -43,27 +46,41 @@ class Player extends BaseTimedWidget {
   @override
   render(Canvas canvas) {
     _player.render(canvas);
+    shots.forEach((Bullet bullet) => {bullet.render(canvas)});
     canvas.restore();
   }
 
   @override
   update(double t) {
+    shotCreator.update(t);
     _player.update(t);
 
     shots.forEach((e) {
-      e.position = e.position.translate(0, 10 * t);
+      e.position = e.position.translate(0, -1500 * t);
     });
   }
 
   @override
-  void onPanUpdate(DragUpdateDetails details) {
-    print('DRAG');
-
+  void onPanStart(DragStartDetails details) {
     shotCreator.start();
+  }
+
+  @override
+  void onPanUpdate(DragUpdateDetails details) {
     // _speed = - _maxSpeed * 2;
     _player.x += details.delta.dx;
     _player.y += details.delta.dy;
   }
+
+  @override
+  void onPanEnd(DragEndDetails details) {
+    if (shotCreator.isRunning()) {
+      shotCreator.pause();
+    }
+  }
+
+  @override
+  onPanDown(DragDownDetails details) {}
 
   void _updateSpeed(double t) {
     _speed += t * _maxSpeed * 5;

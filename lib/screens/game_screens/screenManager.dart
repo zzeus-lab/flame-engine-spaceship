@@ -58,6 +58,14 @@ class ScreenManager extends Game with TapDetector, PanDetector {
     _getActiveScreen()?.onPanUpdate(details);
   }
 
+  void onPanStart(DragStartDetails details) {
+    _getActiveScreen()?.onPanStart(details);
+  }
+
+  void onPanEnd(DragEndDetails details) {
+    _getActiveScreen()?.onPanEnd(details);
+  }
+
   void onLongPressMoveUpdate(LongPressMoveUpdateDetails details) {
     _getActiveScreen()?.onLongPressMoveUpdate(details);
   }

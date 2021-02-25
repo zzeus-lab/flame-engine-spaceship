@@ -10,7 +10,7 @@ class MainScene extends BaseTimedWidget {
   BaseTimedWidget _player;
   // Bullet _bullet;
 
-  MainScene () {
+  MainScene() {
     _background = new Background('9.png');
     _player = Player();
     // _bullet = Bullet();
@@ -45,5 +45,20 @@ class MainScene extends BaseTimedWidget {
   @override
   onPanUpdate(DragUpdateDetails details) {
     _player.onPanUpdate(details);
+  }
+
+  @override
+  onPanDown(DragDownDetails details) {
+    _player.onPanDown(details);
+  }
+
+  @override
+  onPanStart(DragStartDetails details) {
+    _player.onPanStart(details);
+  }
+
+  @override
+  onPanEnd(DragEndDetails details) {
+    _player.onPanEnd(details);
   }
 }

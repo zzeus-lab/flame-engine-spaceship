@@ -14,4 +14,8 @@ abstract class BaseTimedWidget {
   onTapDown(TapDownDetails details) {}
 
   onPanDown(DragDownDetails details) {}
+
+  onPanStart(DragStartDetails details) {}
+
+  onPanEnd(DragEndDetails details) {}
 }
