@@ -1,4 +1,4 @@
-# testGame
+# Flutter Space Game
 
 A new Flutter project.
 
